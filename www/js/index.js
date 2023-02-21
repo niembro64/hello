@@ -1,29 +1,37 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
- */
+document.addEventListener('deviceready', function () {
+  console.log('Device is ready!');
+  console.log('Phaser Version: ' + phaser.VERSION);
+  var config = {
+    type: phaser.WEBGL,
+    parent: 'game',
+    scene: {
+      preload: preload,
+      create: create,
+    },
+  };
 
-// Wait for the deviceready event before using any of Cordova's device APIs.
-// See https://cordova.apache.org/docs/en/latest/cordova/events/events.html#deviceready
-document.addEventListener('deviceready', onDeviceReady, false);
+  var game = new phaser.Game(config);
 
-function onDeviceReady() {
-    // Cordova is now initialized. Have fun!
+  function preload() {
+    this.load.atlas('sheet', 'img/sheet.png', 'img/sheet.json');
+  }
 
-    console.log('Running cordova-' + cordova.platformId + '@' + cordova.version);
-    document.getElementById('deviceready').classList.add('ready');
-}
+  function create() {
+    this.anims.create({
+      key: 'plane',
+      repeat: -1,
+      frameRate: 10,
+      frames: this.anims.generateFrameNames('sheet', {
+        start: 1,
+        end: 3,
+        prefix: 'planeBlue',
+        suffix: '.png',
+      }),
+    });
+
+    var plane = this.add.sprite(400, 300, 'sheet').play('plane');
+
+    this.add.image(0, 0, 'sheet', 'background.png').setOrigin(0);
+    var plane = this.add.sprite(400, 300, 'sheet').play('plane');
+  }
+});
