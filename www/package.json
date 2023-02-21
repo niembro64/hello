@@ -1,0 +1,14 @@
+{
+  "name": "www",
+  "version": "1.0.0",
+  "description": "first",
+  "main": "index.js",
+  "scripts": {
+    "test": "w"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "phaser": "^3.55.2"
+  }
+}
